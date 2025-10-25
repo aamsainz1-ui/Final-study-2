@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview: Login & Register System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg-login {
+            background: linear-gradient(135deg, #dbeafe 0%, #ffffff 50%, #f3e8ff 100%);
+        }
+        .gradient-bg-register {
+            background: linear-gradient(135deg, #f3e8ff 0%, #ffffff 50%, #dbeafe 100%);
+        }
+        .gradient-icon-login {
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+        }
+        .gradient-icon-register {
+            background: linear-gradient(135deg, #9333ea, #3b82f6);
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+            color: white;
+        }
+        .pin-input {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .pin-input:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .strength-weak { color: #ef4444; }
+        .strength-medium { color: #f59e0b; }
+        .strength-strong { color: #10b981; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen p-4 md:p-8">
+        <!-- Header -->
+        <div class="max-w-6xl mx-auto mb-8">
+            <h1 class="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Authentication System Preview
+            </h1>
+            <p class="text-center text-gray-600">Login & Registration UI/UX Improvements</p>
+
+            <!-- Tab Buttons -->
+            <div class="flex justify-center gap-4 mt-6">
+                <button onclick="showTab('login')" id="tab-login" class="tab-button active px-6 py-3 rounded-lg font-medium transition-all">
+                    Login Page
+                </button>
+                <button onclick="showTab('register')" id="tab-register" class="tab-button px-6 py-3 rounded-lg font-medium transition-all bg-gray-200">
+                    Register Page
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Preview -->
+        <div id="preview-login" class="preview-container">
+            <div class="gradient-bg-login min-h-screen flex items-center justify-center p-4">
+                <div class="w-full max-w-md">
+                    <div class="bg-white rounded-2xl shadow-2xl border-0 overflow-hidden">
+                        <!-- Header -->
+                        <div class="p-8 pb-6">
+                            <div class="text-center space-y-3">
+                                <div class="mx-auto w-20 h-20 gradient-icon-login rounded-2xl flex items-center justify-center shadow-lg">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        ยินดีต้อนรับกลับ
+                                    </h2>
+                                    <p class="text-gray-600 mt-2">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="px-8 pb-8 space-y-6">
+                            <!-- Success Message -->
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span class="text-green-700 text-sm">สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ</span>
+                            </div>
+
+                            <form class="space-y-5">
+                                <!-- Username -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                        ชื่อผู้ใช้
+                                    </label>
+                                    <input type="text" placeholder="กรอกชื่อผู้ใช้ของคุณ" value="testuser"
+                                        class="w-full h-12 px-4 text-base border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                                </div>
+
+                                <!-- PIN -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                        PIN 6 หลัก
+                                    </label>
+                                    <div class="relative">
+                                        <input type="password" id="login-pin" placeholder="กรอก PIN 6 หลัก" value="123456"
+                                            class="w-full h-12 px-4 pr-12 text-base border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                                        <button type="button" onclick="togglePin('login-pin', 'login-eye')" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                            <svg id="login-eye" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-500">6/6 หลัก</span>
+                                        <span class="text-green-600 flex items-center gap-1">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            ครบถ้วน
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Remember Me & Forgot -->
+                                <div class="flex items-center justify-between">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded border-gray-300">
+                                        <span class="text-sm text-gray-600">จดจำฉัน</span>
+                                    </label>
+                                    <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline">ลืม PIN?</a>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="button" class="w-full h-12 text-base font-medium text-white rounded-lg shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                                    เข้าสู่ระบบ
+                                </button>
+                            </form>
+
+                            <!-- Register Link -->
+                            <div class="pt-4 border-t border-gray-200 text-center text-sm">
+                                <span class="text-gray-600">ยังไม่มีบัญชี? </span>
+                                <a href="#" onclick="showTab('register'); return false;" class="text-blue-600 hover:text-blue-700 font-medium hover:underline">สมัครสมาชิกฟรี</a>
+                            </div>
+
+                            <!-- Demo Accounts -->
+                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-4 space-y-3">
+                                <h4 class="font-semibold text-blue-900 text-sm flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                    บัญชีทดสอบ
+                                </h4>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-white rounded-lg p-2 border border-blue-100">
+                                        <div class="font-medium text-blue-900">Owner</div>
+                                        <div class="text-blue-700">owner / 123456</div>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-2 border border-blue-100">
+                                        <div class="font-medium text-blue-900">Admin</div>
+                                        <div class="text-blue-700">admin / 123456</div>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-2 border border-blue-100">
+                                        <div class="font-medium text-blue-900">Editor</div>
+                                        <div class="text-blue-700">editor / 123456</div>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-2 border border-blue-100">
+                                        <div class="font-medium text-blue-900">Viewer</div>
+                                        <div class="text-blue-700">viewer / 123456</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="mt-6 text-center text-xs text-gray-500">
+                        <p>© 2025 Financial Management System</p>
+                        <p class="mt-1">ปลอดภัยและเชื่อถือได้</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Preview -->
+        <div id="preview-register" class="preview-container hidden">
+            <div class="gradient-bg-register min-h-screen flex items-center justify-center p-4">
+                <div class="w-full max-w-md">
+                    <div class="bg-white rounded-2xl shadow-2xl border-0 overflow-hidden">
+                        <!-- Header -->
+                        <div class="p-8 pb-6">
+                            <div class="text-center space-y-3">
+                                <div class="mx-auto w-20 h-20 gradient-icon-register rounded-2xl flex items-center justify-center shadow-lg">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                        สมัครสมาชิก
+                                    </h2>
+                                    <p class="text-gray-600 mt-2">สร้างบัญชีเพื่อเริ่มใช้งานระบบ</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="px-8 pb-8">
+                            <form class="space-y-5">
+                                <!-- Name -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                        ชื่อ-นามสกุล
+                                    </label>
+                                    <input type="text" placeholder="กรอกชื่อ-นามสกุลของคุณ" value="สมชาย ใจดี"
+                                        class="w-full h-12 px-4 text-base border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                </div>
+
+                                <!-- Username -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        ชื่อผู้ใช้
+                                    </label>
+                                    <input type="text" placeholder="เลือกชื่อผู้ใช้ (ภาษาอังกฤษหรือตัวเลข)" value="somchai_2025"
+                                        class="w-full h-12 px-4 text-base border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                    <p class="text-xs text-gray-500">ตัวอักษร a-z, ตัวเลข 0-9 และ _ เท่านั้น (อย่างน้อย 3 ตัว)</p>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        </svg>
+                                        อีเมล
+                                    </label>
+                                    <input type="email" placeholder="your@email.com" value="somchai@example.com"
+                                        class="w-full h-12 px-4 text-base border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                </div>
+
+                                <!-- PIN -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                        PIN 6 หลัก
+                                    </label>
+                                    <div class="relative">
+                                        <input type="password" id="reg-pin" placeholder="สร้าง PIN 6 หลัก" value="247913"
+                                            class="w-full h-12 px-4 pr-12 text-base border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                        <button type="button" onclick="togglePin('reg-pin', 'reg-eye')" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                            <svg id="reg-eye" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-500">6/6 หลัก</span>
+                                        <span class="strength-strong flex items-center gap-1">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            แข็งแรง
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Confirm PIN -->
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                        ยืนยัน PIN
+                                    </label>
+                                    <div class="relative">
+                                        <input type="password" id="confirm-pin" placeholder="กรอก PIN อีกครั้งเพื่อยืนยัน" value="247913"
+                                            class="w-full h-12 px-4 pr-12 text-base border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                        <button type="button" onclick="togglePin('confirm-pin', 'confirm-eye')" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                            <svg id="confirm-eye" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-xs">
+                                        <span class="text-green-600 flex items-center gap-1">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            PIN ตรงกัน
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="button" class="w-full h-12 text-base font-medium text-white rounded-lg shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                                    สมัครสมาชิก
+                                </button>
+                            </form>
+
+                            <!-- Login Link -->
+                            <div class="mt-6 pt-6 border-t border-gray-200 text-center text-sm">
+                                <span class="text-gray-600">มีบัญชีอยู่แล้ว? </span>
+                                <a href="#" onclick="showTab('login'); return false;" class="text-purple-600 hover:text-purple-700 font-medium hover:underline">เข้าสู่ระบบ</a>
+                            </div>
+
+                            <!-- Info Box -->
+                            <div class="mt-6 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-4">
+                                <h4 class="font-semibold text-purple-900 text-sm mb-2">ข้อมูลสำหรับคุณ</h4>
+                                <ul class="text-xs text-purple-700 space-y-1">
+                                    <li>• PIN จะใช้สำหรับเข้าสู่ระบบ</li>
+                                    <li>• ควรใช้ PIN ที่ไม่ซ้ำกันและจดจำได้ง่าย</li>
+                                    <li>• ข้อมูลของคุณจะถูกเก็บอย่างปลอดภัย</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="mt-6 text-center text-xs text-gray-500">
+                        <p>© 2025 Financial Management System</p>
+                        <p class="mt-1">การสมัครสมาชิกฟรี ไม่มีค่าใช้จ่าย</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature List -->
+        <div class="max-w-6xl mx-auto mt-8 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">✨ Features Implemented</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-lg mb-3 text-blue-600">Login Page</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Show/Hide PIN:</strong> Toggle password visibility</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Remember Me:</strong> Save username with localStorage</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>PIN Counter:</strong> Real-time character count (6/6)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Success Messages:</strong> Display from query params</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Loading States:</strong> Disabled fields during submit</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Gradient UI:</strong> Modern blue-purple design</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-3 text-purple-600">Register Page</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Email Field:</strong> Required with validation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>PIN Strength Meter:</strong> Weak/Medium/Strong indicator</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Real-time Validation:</strong> Instant PIN match check</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Username Formatting:</strong> Auto lowercase, alphanumeric</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Show/Hide PIN:</strong> For both PIN fields</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 mt-0.5">✓</span>
+                            <span><strong>Gradient UI:</strong> Modern purple-blue design</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            // Hide all previews
+            document.querySelectorAll('.preview-container').forEach(el => el.classList.add('hidden'));
+
+            // Show selected preview
+            document.getElementById('preview-' + tab).classList.remove('hidden');
+
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-gray-200');
+            });
+
+            const activeBtn = document.getElementById('tab-' + tab);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('bg-gray-200');
+        }
+
+        function togglePin(inputId, eyeId) {
+            const input = document.getElementById(inputId);
+            const eye = document.getElementById(eyeId);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                eye.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>';
+            } else {
+                input.type = 'password';
+                eye.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+            }
+        }
+
+        // Initialize
+        showTab('login');
+    </script>
+</body>
+</html>
